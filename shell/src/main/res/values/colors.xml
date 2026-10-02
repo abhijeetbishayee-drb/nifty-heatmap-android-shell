@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Matches the web boards' dark palette (assets/app.css in nifty-heatmap-web). -->
+<resources>
+    <color name="shell_bg">#0B0C0D</color>
+    <color name="shell_panel">#141517</color>
+    <color name="shell_text">#ECEAE4</color>
+    <color name="shell_text_dim">#8B8A83</color>
+    <color name="shell_accent">#E8B84A</color>
+</resources>

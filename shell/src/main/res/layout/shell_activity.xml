@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shell_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/shell_bg">
+
+    <WebView
+        android:id="@+id/shell_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/shell_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="top"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressTint="@color/shell_accent"
+        android:progressBackgroundTint="@color/shell_bg" />
+
+    <LinearLayout
+        android:id="@+id/shell_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shell_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shell_offline_title"
+            android:textColor="@color/shell_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/shell_offline_body"
+            android:textColor="@color/shell_text_dim"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/shell_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/shell_accent"
+            android:paddingHorizontal="28dp"
+            android:text="@string/shell_retry"
+            android:textColor="@color/shell_bg" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme: also makes the WebView report prefers-color-scheme: dark,
+         so the boards render in their dark palette to match the app chrome. -->
+    <style name="Theme.HeatmapShell" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/shell_bg</item>
+        <item name="android:colorAccent">@color/shell_accent</item>
+        <item name="android:colorPrimary">@color/shell_panel</item>
+        <item name="android:statusBarColor">@color/shell_bg</item>
+        <item name="android:navigationBarColor">@color/shell_bg</item>
+    </style>
+</resources>
