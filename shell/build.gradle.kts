@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "io.github.abhijeetbishayee.heatmap.shell"
+    namespace = "com.sectorchakra.shell"
     compileSdk = 36
 
     defaultConfig {

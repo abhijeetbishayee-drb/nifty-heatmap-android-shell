@@ -1,4 +1,4 @@
-package io.github.abhijeetbishayee.heatmap.shell;
+package com.sectorchakra.shell;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
