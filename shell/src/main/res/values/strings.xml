@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nifty Heatmap</string>
+    <string name="app_name">Sector Chakra</string>
     <string name="shell_offline_title">Can\'t reach the heatmap</string>
     <string name="shell_offline_body">Check your internet connection and try again.</string>
     <string name="shell_retry">Retry</string>

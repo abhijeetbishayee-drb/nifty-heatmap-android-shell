@@ -1,6 +1,6 @@
 # nifty-heatmap-android-shell
 
-Shared Android code for the two Nifty Heatmap apps:
+Shared Android code for the two **Sector Chakra** apps (formerly "Nifty Heatmap"):
 
 | Repo | Output | Distribution |
 |---|---|---|

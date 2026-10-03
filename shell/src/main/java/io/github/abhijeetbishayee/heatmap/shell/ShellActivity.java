@@ -59,7 +59,7 @@ public class ShellActivity extends Activity {
     /** Tag appended to the WebView user agent, so the pages can tell they are
      *  inside the app if they ever need to. */
     protected String userAgentTag() {
-        return "NiftyHeatmapApp";
+        return "SectorChakraApp";
     }
 
     /** Scheme of the links {@link #extraNavEntries()} adds. Never leaves the app. */
