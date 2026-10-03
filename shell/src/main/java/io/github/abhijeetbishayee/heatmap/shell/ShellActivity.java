@@ -62,6 +62,23 @@ public class ShellActivity extends Activity {
         return "NiftyHeatmapApp";
     }
 
+    /** Scheme of the links {@link #extraNavEntries()} adds. Never leaves the app. */
+    protected static final String APP_SCHEME = "heatmapapp";
+
+    /**
+     * Native entries this app adds to the end of each board's nav bar, as
+     * {id, label} pairs - e.g. the Play build's "Pro" screen. Tapping one calls
+     * {@link #onExtraNavEntry(String)} with its id. The shell itself adds none,
+     * so the sideload APK shows the boards' nav exactly as the website does.
+     */
+    protected String[][] extraNavEntries() {
+        return new String[0][];
+    }
+
+    /** Called when the user taps an entry from {@link #extraNavEntries()}. */
+    protected void onExtraNavEntry(String id) {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +107,9 @@ public class ShellActivity extends Activity {
 
     /** Targeting API 35+ makes the app draw edge-to-edge on Android 15+, under
      *  the status and navigation bars. Pad the content clear of them there;
-     *  older versions still lay the window out below the bars themselves. */
-    private void applySystemBarInsets(View root) {
+     *  older versions still lay the window out below the bars themselves.
+     *  Public so an app's own screens (e.g. Play's Pro screen) match. */
+    public static void applySystemBarInsets(View root) {
         if (Build.VERSION.SDK_INT < 35) return;
         root.setOnApplyWindowInsetsListener((v, insets) -> {
             Insets bars = insets.getInsets(
@@ -120,6 +138,10 @@ public class ShellActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
+                if (APP_SCHEME.equals(uri.getScheme())) {
+                    onExtraNavEntry(uri.getHost());
+                    return true;
+                }
                 if (isInApp(uri)) return false;
                 openExternally(uri);
                 return true;
@@ -133,6 +155,7 @@ public class ShellActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (!mainFrameFailed) errorView.setVisibility(View.GONE);
+                if (url != null && isInApp(Uri.parse(url))) injectExtraNavEntries(view);
             }
 
             @Override
@@ -152,6 +175,28 @@ public class ShellActivity extends Activity {
                 progress.setVisibility(newProgress >= 100 ? View.GONE : View.VISIBLE);
             }
         });
+    }
+
+    /** Appends {@link #extraNavEntries()} to the page's nav bar. The heatmap
+     *  pages use .nav and the sibling boards .xnav; a page with neither is left
+     *  alone. Idempotent, since onPageFinished can fire more than once. */
+    private void injectExtraNavEntries(WebView view) {
+        String[][] entries = extraNavEntries();
+        if (entries.length == 0) return;
+        org.json.JSONArray json = new org.json.JSONArray();
+        for (String[] e : entries) {
+            json.put(new org.json.JSONArray().put(e[0]).put(e[1]));
+        }
+        view.evaluateJavascript("(function(entries){"
+                + "var nav=document.querySelector('.nav,.xnav');"
+                + "if(!nav||nav.querySelector('[data-app-entry]'))return;"
+                + "entries.forEach(function(e){"
+                + "var a=document.createElement('a');"
+                + "a.href='" + APP_SCHEME + "://'+e[0];"
+                + "a.textContent=e[1];"
+                + "a.setAttribute('data-app-entry',e[0]);"
+                + "nav.appendChild(a);});"
+                + "})(" + json + ");", null);
     }
 
     static boolean isInApp(Uri uri) {
