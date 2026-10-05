@@ -37,13 +37,15 @@ public class ShellActivity extends Activity {
     protected static final String HOST = "abhijeetbishayee-drb.github.io";
 
     /** Path prefixes on HOST that stay inside the app. Every other link - an NSE
-     *  quote page from a tile tap, say - opens in the user's browser, which is
-     *  also the only place NSE's site works (it blocks embedded WebViews). */
+     *  quote page from a tile tap, say, or a US tile's Yahoo Finance page - opens
+     *  in the user's browser, which is also the only place NSE's site works (it
+     *  blocks embedded WebViews). */
     private static final String[] IN_APP_PATHS = {
             "/nifty-heatmap-web/",
             "/fno-rollover/",
             "/nifty-pcr-tracker/",
             "/nifty-ema-board/",
+            "/us-market-boards/",      // US Heatmap / RRG / 44 EMA / PCR (added 2026-10-05)
     };
 
     private WebView web;

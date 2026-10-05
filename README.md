@@ -15,7 +15,7 @@ the Play side) sign-in and billing.
 ## What the shell is
 
 One activity (`ShellActivity`) with a WebView showing the live boards on GitHub
-Pages — Nifty 50, F&O Sectors, RRG (Beta), and the Rollover / PCR / 44 EMA
+Pages — Nifty 50, F&O Sectors, RRG (Beta), the Rollover / PCR / 44 EMA boards, and the US boards (Heatmap / RRG / 44 EMA / PCR)
 boards. The boards are **not** reimplemented natively: the previous Kivy app did
 that and drifted from the website. A change to the website reaches the apps
 without an app release.
